@@ -1,0 +1,17 @@
+Jinja2
+aiohttp
+analytics-python
+fastapi
+ffmpy
+markdown-it-py[linkify,plugins]
+matplotlib
+numpy
+orjson
+pandas
+paramiko
+pillow
+pycryptodome
+pydub
+python-multipart
+requests
+uvicorn

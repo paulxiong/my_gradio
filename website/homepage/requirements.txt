@@ -1,0 +1,6 @@
+markdown2
+jinja2
+requests
+pydrive
+pycairo
+beautifulsoup4

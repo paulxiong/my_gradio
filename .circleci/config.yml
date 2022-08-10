@@ -1,0 +1,70 @@
+version: 2.1
+orbs:
+  codecov: codecov/codecov@3.2.2
+  node: circleci/node@5.0.2
+jobs:
+  build:
+    environment:
+      NODE_OPTIONS: --max-old-space-size=4096
+    docker:
+      - image: circleci/python:3.9.2-browsers
+    steps:
+      - checkout
+      - run: mkdir test-reports
+      - restore_cache:
+          key: deps1-{{ .Branch }}-{{ checksum "gradio.egg-info/requires.txt" }}
+      - run:
+          name: Install ffmpeg
+          command: |
+            sudo apt update
+            sudo apt install ffmpeg -y
+      - run:
+          name: Install Python deps in a venv
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            bash scripts/install_test_requirements.sh
+      - run:
+          command: |
+            chromedriver --version
+          name: Check chrome driver install
+      - save_cache:
+          key: deps1-{{ .Branch }}-{{ checksum "gradio.egg-info/requires.txt" }}
+          paths:
+            - "venv"
+      - node/install:
+          node-version: "16"
+      - run:
+          name: Build frontend
+          command: |
+            npm i pnpm@6 -g
+            cd ui
+            pnpm i --frozen-lockfile
+            pnpm build
+      - run:
+          command: |
+            mkdir screenshots
+      - run:
+          command: |
+            . venv/bin/activate
+            python -m black --check gradio test
+      - run:
+          command: |
+            . venv/bin/activate
+            python -m isort --profile=black --check-only gradio test
+      - run:
+          command: |
+            . venv/bin/activate
+            python -m  flake8 --ignore=E731,E501,E722,W503,E126,F401,E203,F403 gradio test
+      - run:
+          command: |
+            . venv/bin/activate
+            coverage run -m pytest
+            coverage xml
+      - codecov/upload:
+          file: "coverage.xml"
+      - store_artifacts:
+          path: /home/circleci/project/test/tmp
+          destination: screenshots
+      - store_test_results:
+          path: test-reports/

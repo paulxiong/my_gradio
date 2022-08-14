@@ -31,7 +31,6 @@
 	let sketch: Sketch;
 
 	function handle_upload({ detail }: CustomEvent<string>) {
-		// alert("Boostx Image handle2_upload")
 		// console.log({detail})
 		value = detail;
 	}
@@ -44,18 +43,9 @@
 	function handle_save({ detail }: { detail: string }) {
 		value = detail.image;
 		crop_xy_store.update(n => detail.crop_xy );
-		alert("boostx: handle_save "+detail.crop_xy);
-		// crop_xy_stre.update(value_xy);
+		// alert("boostx: handle_save "+detail.crop_xy);
 		dispatch(streaming ? "stream" : "edit");
 	}
-	// function handle_save_crop_xy({ detail }: { detail: string }) {
-	// function handle_save_crop_xy(event) {
-	// 	// value_xy = detail;
-	// 	value_xy = event;
-	// 	alert("Boostx Image handle_save_crop_xy "+value_xy)
-	// 	console.log("boostx detail " + value_xy)
-	// 	// dispatch(streaming ? "stream" : "edit");
-	// }
 
 	const dispatch = createEventDispatcher<{
 		change: string | null;
@@ -109,14 +99,6 @@
 		{/if}
 	{:else if tool === "select"}
 		<Cropper image={value} on:crop={handle_save} />
-		<!-- <div on:crop={alert("boostx: crop event...")}>
-		    <BoostxTest>
-				<h2>THIS IS BOOSTX TEST:</h2>
-				<p>crop_xy = {value_xy}</p>
-			</BoostxTest> 
-		</div> -->
-		<!-- {@debug image} -->
-		<!-- <Cropper crop_xy={value_xy} on:crop_exy={handle_save_crop_xy} /> -->
 		<ModifyUpload on:clear={(e) => (handle_clear(e), (tool = "editor"))} />
 	{:else if tool === "editor"}
 		<ModifyUpload

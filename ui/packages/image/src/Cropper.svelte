@@ -21,7 +21,9 @@
 				// console.log("boostx,  image_data      " + image_data);
 				// dispatch("crop", image_data);
 				dispatch("crop", {
-					image:image_data,
+					// image:image_data,
+					// we only send the bigger original image back. 
+					 image:image,
 					crop_xy:crop_xy_data
 				});
 			}

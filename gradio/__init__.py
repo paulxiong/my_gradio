@@ -34,6 +34,8 @@ from gradio.components import (
     Slider,
     StatusTracker,
     Textbox,
+    Textbo1,
+    Textbo2,
     TimeSeries,
     Timeseries,
     Variable,

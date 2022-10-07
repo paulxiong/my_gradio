@@ -204,7 +204,7 @@ class Interface(Blocks):
                     "Setting cache_examples to False."
                 )
             self.cache_examples = False
-
+        # breakpoint()
         self.input_components = [get_component_instance(i).unrender() for i in inputs]
         self.output_components = [get_component_instance(o).unrender() for o in outputs]
 
@@ -669,7 +669,7 @@ class Interface(Blocks):
         Returns:
         predictions (list): A list of predictions (not post-processed).
         """
-        breakpoint()
+        # breakpoint()
         if self.api_mode:  # Serialize the input
             processed_input = [
                 input_component.serialize(processed_input[i], called_directly)
@@ -711,7 +711,7 @@ class Interface(Blocks):
         processed output: a list of processed  outputs to return as the prediction(s).
         duration: a list of time deltas measuring inference time for each prediction fn.
         """
-        breakpoint()
+        # breakpoint()
         processed_input = [
             input_component.preprocess(raw_input[i])
             for i, input_component in enumerate(self.input_components)

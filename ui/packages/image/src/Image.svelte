@@ -24,14 +24,16 @@
 	export let streaming: boolean = false;
 	export let pending: boolean = false;
 
-	import { crop_xy_store } from '../../../../ui/packages/app/src/components/Textbox/stores';
+	import { canvas_image_xywh_store } from '../../../../ui/packages/app/src/components/Textbo1/stores';
+	import { crop_image_xywh_store } from '../../../../ui/packages/app/src/components/Textbo2/stores';
 
 
 	let value_xy: '123' | string;
 	let sketch: Sketch;
 
 	function handle_upload({ detail }: CustomEvent<string>) {
-		// console.log({detail})
+		console.log("handle_upload...")
+		console.log({detail})
 		value = detail;
 	}
 
@@ -41,9 +43,12 @@
 	}
 
 	function handle_save({ detail }: { detail: string }) {
-		value = detail.image;
-		crop_xy_store.update(n => detail.crop_xy );
-		// alert("boostx: handle_save "+detail.crop_xy);
+		value = detail.image_tmp;
+		canvas_image_xywh_store.update(n => detail.canvas_image_xywh_tmp);
+		crop_image_xywh_store.update(n => detail.crop_image_xywh_tmp);
+		console.log("handle_save...")
+		console.log({detail})
+		// alert("boostx: handle_save canvas_image_xywh:"+detail.image_tmp + " crop_image_xywh: "+detail.crop_image_xywh_tmp);
 		dispatch(streaming ? "stream" : "edit");
 	}
 

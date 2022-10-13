@@ -1803,6 +1803,7 @@ class Image(Editable, Clearable, Changeable, Streamable, IOComponent):
         Returns:
         (numpy.array | PIL.Image | str): image in requested format
         """
+        breakpoint();
         if x is None:
             return x
         im = processing_utils.decode_base64_to_image(x)

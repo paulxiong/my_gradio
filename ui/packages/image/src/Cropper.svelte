@@ -40,9 +40,12 @@
 				const canvas_image = cropper.getCroppedCanvas().toDataURL();
 				const canvas_image_xywh = cropper.getData();
 				cropper.setCropBoxData(cropped_box_data); 		//restore the crop box data
+				const cropped_image = cropper.getCroppedCanvas().toDataURL();
 				const crop_image_xywh = cropper.getData();
 				// alert("boostx, crop_xy_data:  " + crop_xy_data );
 				// dispatch("crop_exy",crop_xy_data);
+				console.log("boostx, canvas_imge" );
+				console.log(canvas_image);
 				console.log("boostx,  canvas_image_xywh      ");
 				console.log(canvas_image_xywh);
 				console.log("boostx,  crop_image_xywh      ");
@@ -51,7 +54,7 @@
 				dispatch("crop", {
 					// image:image_data,
 					// we only send the bigger original image back. 
-					image_tmp:canvas_image,
+					image_tmp:cropped_image,
 					canvas_image_xywh_tmp:canvas_image_xywh,
 					crop_image_xywh_tmp:crop_image_xywh
 				});

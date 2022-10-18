@@ -204,7 +204,7 @@ class Interface(Blocks):
                     "Setting cache_examples to False."
                 )
             self.cache_examples = False
-        # breakpoint()
+        breakpoint()
         self.input_components = [get_component_instance(i).unrender() for i in inputs]
         self.output_components = [get_component_instance(o).unrender() for o in outputs]
 

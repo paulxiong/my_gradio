@@ -54,7 +54,8 @@
 				dispatch("crop", {
 					// image:image_data,
 					// we only send the bigger original image back. 
-					image_tmp:cropped_image,
+					// image_tmp:cropped_image,
+					image_tmp:canvas_image,
 					canvas_image_xywh_tmp:canvas_image_xywh,
 					crop_image_xywh_tmp:crop_image_xywh
 				});

@@ -122,18 +122,18 @@ def resize_and_crop(img, size, crop_type="center"):
     from pascal_voc_writer import Writer
     import datetime
     import time
-    # breakpoint()
+    breakpoint()
     jpeg_path = '/mnt/anno_dataset/data/tmp_test/train/VOCdevkit/VOC2012/JPEGImages/'
     xml_path = '/mnt/anno_dataset/data/tmp_test/train/VOCdevkit/VOC2012/Annotations/'
     pascal_file ='boost_img_'+str(datetime.datetime.now().strftime("%Y%m%d-%H%M%S"))
-    pascal_jpg = jpeg_path + pascal_file+'.jpg'
-    pascal_xml = xml_path + pascal_file+'.xml'
-    # img = Image.fromarray(np.uint8(image)).convert('RGB')
-    # img.save(pascal_jpg)
-    # width,height = img.size
-    # writer = Writer(pascal_jpg, width,height)
-    # writer.addObject('dog', 1,1, width, height)
-    # writer.save(pascal_xml)
+    pascal_jpg = jpeg_path + "output_"+ pascal_file+'.jpg'
+    pascal_xml = xml_path + "output"+ pascal_file+'.xml'
+    img = Image.fromarray(np.uint8(img)).convert('RGB')
+    img.save(pascal_jpg)
+    width,height = img.size
+    writer = Writer(pascal_jpg, width,height)
+    writer.addObject('dog', 1,1, width, height)
+    writer.save(pascal_xml)
 
     return ImageOps.fit(img, resize, centering=center)
 

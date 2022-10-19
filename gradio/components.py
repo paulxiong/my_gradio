@@ -1812,7 +1812,9 @@ class Image(Editable, Clearable, Changeable, Streamable, IOComponent):
             warnings.simplefilter("ignore")
             im = im.convert(self.image_mode)
         if self.shape is not None:
-            im = processing_utils.resize_and_crop(im, self.shape)
+            # boostx: commented following line for show the canvas image instead to fit into the destination shape
+            # im = processing_utils.resize_and_crop(im, self.shape)
+            ...
         if self.invert_colors:
             im = PIL.ImageOps.invert(im)
         if self.type == "pil":

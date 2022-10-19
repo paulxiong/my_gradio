@@ -117,3 +117,12 @@
 		<img class="w-full h-full object-contain" src={value} alt="" />
 	{/if}
 </div>
+<div class:bg-gray-200={value} class:h-60={source !== "webcam"}>
+	{#if source === "canvas"}
+	<ModifySketch
+		on:undo={() => sketch.undo()}
+		on:clear={() => sketch.clear()}
+	/>
+	<Sketch {value} bind:this={sketch} on:change={handle_save} />
+	{/if}
+</div>

@@ -34,8 +34,14 @@
 				// const crop_image_size=cropper.getImageData();
 				//get the canvas position, size for setting cropped box
 				const canvas_data = cropper.getCanvasData();
+				const container_data = cropper.getContainerData();
 				const cropped_box_data = cropper.getCropBoxData();  //backup the crop box data
-				cropper.setCropBoxData(canvas_data)
+				// canvas_obj_tmp = JSON.parse(canvas_data);
+				if (canvas_data.width > container_data.width || canvas_data.height > container_data.height){
+					cropper.setCropBoxData(container_data)
+				} else {
+					cropper.setCropBoxData(canvas_data)
+				};
 				//get the cropped image, not the size, 
 				const canvas_image = cropper.getCroppedCanvas().toDataURL();
 				const canvas_image_xywh = cropper.getData();
